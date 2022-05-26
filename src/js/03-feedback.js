@@ -27,9 +27,15 @@ function onFormInput(e) {
 
 function onFormSubmit(e) {
   e.preventDefault();
+  const formElements = e.currentTarget.elements;
+  if (formElements.email.value === '' || formElements.message.value === '') {
+    const message = 'Заполни все поля';
+    alert(message);
+    return;
+  }
   e.target.reset();
   localStorage.removeItem(STORAGE_KEY);
-  console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+  // console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
 }
 
 function saveTextInput() {
@@ -46,4 +52,5 @@ function saveTextInput() {
     refs.message.value = parsMessage.message;
     // refs.textarea.value = parsMessage.textarea;
   }
+  console.log(saveMessage);
 }

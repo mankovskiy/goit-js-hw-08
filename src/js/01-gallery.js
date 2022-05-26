@@ -12,7 +12,7 @@ const imgItems = document.querySelector('.gallery');
 
 const imgMarkup = createImgItemsMarkup(galleryItems);
 
-imgItems.addEventListener('click', onOpenMaxImgModal);
+// imgItems.addEventListener('click', onOpenMaxImgModal);
 
 imgItems.insertAdjacentHTML('beforeend', imgMarkup);
 
@@ -26,15 +26,15 @@ function createImgItemsMarkup(galleryItems) {
     .join('');
 }
 
-function onOpenMaxImgModal(event) {
-  event.preventDefault();
-  if (event.target.nodeName !== 'IMG') {
-    return;
-  }
-  let lightbox = new SimpleLightbox('.gallery a', {
-    captionDelay: 250,
-    showCounter: false,
-    alertError: false,
-    captionsData: 'alt',
-  });
-}
+// function onOpenMaxImgModal(event) {
+//   event.preventDefault();
+//   if (event.target.nodeName !== 'IMG') {
+//     return;
+//   }
+let lightbox = new SimpleLightbox('.gallery a', {
+  captionDelay: 250,
+  showCounter: false,
+  alertError: false,
+  captionsData: 'alt',
+});
+// }
