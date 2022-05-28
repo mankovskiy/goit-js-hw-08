@@ -12,8 +12,6 @@ const imgItems = document.querySelector('.gallery');
 
 const imgMarkup = createImgItemsMarkup(galleryItems);
 
-// imgItems.addEventListener('click', onOpenMaxImgModal);
-
 imgItems.insertAdjacentHTML('beforeend', imgMarkup);
 
 function createImgItemsMarkup(galleryItems) {

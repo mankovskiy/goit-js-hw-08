@@ -4,34 +4,31 @@ const STORAGE_KEY = 'feedback-form-state';
 
 const refs = {
   form: document.querySelector('.feedback-form'),
-  email: document.querySelector('.feedback-form input'),
-  message: document.querySelector('.feedback-form textarea'),
+  input: document.querySelector('input'),
+  textarea: document.querySelector('textarea'),
 };
-saveTextInput();
+
 refs.form.addEventListener('submit', onFormSubmit);
 
 refs.form.addEventListener('input', throttle(onFormInput, 500));
 
-const formData = localStorage.getItem(STORAGE_KEY)
+// const formData = {};
+let formData = localStorage.getItem(STORAGE_KEY)
   ? JSON.parse(localStorage.getItem(STORAGE_KEY))
   : {};
-// const formData = {};
-
-saveTextInput();
-
 function onFormInput(e) {
   formData[e.target.name] = e.target.value;
-
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
+saveTextInput();
+
 function onFormSubmit(e) {
   e.preventDefault();
-  const formElements = e.currentTarget.elements;
-  if (formElements.email.value === '' || formElements.message.value === '') {
+  // const formElements = e.currentTarget.elements;
+  if (refs.input.value === '' || refs.textarea.value === '') {
     const message = 'Заполни все поля';
-    alert(message);
-    return;
+    return alert(message);
   }
   e.target.reset();
   localStorage.removeItem(STORAGE_KEY);
@@ -39,18 +36,18 @@ function onFormSubmit(e) {
 }
 
 function saveTextInput() {
-  const saveMessage = localStorage.getItem(STORAGE_KEY);
+  let saveMessage = localStorage.getItem(STORAGE_KEY);
 
-  const parsMessage = JSON.parse(saveMessage);
-  console.log(parsMessage);
+  if (saveMessage) {
+    formData = JSON.parse(saveMessage);
+    // refs.input.value = saveMessage.email;
+    // refs.textarea.value = saveMessage.message;
+  }
+  if (formData.email) {
+    refs.input.value = formData.email;
+  }
 
-  if (parsMessage) {
-    refs.email.value = parsMessage.email;
-    // refs.textarea.value = parsMessage.textarea;
+  if (formData.message) {
+    refs.textarea.value = formData.message;
   }
-  if (parsMessage) {
-    refs.message.value = parsMessage.message;
-    // refs.textarea.value = parsMessage.textarea;
-  }
-  console.log(saveMessage);
 }
