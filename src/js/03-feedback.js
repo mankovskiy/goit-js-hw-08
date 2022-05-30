@@ -15,9 +15,9 @@ refs.form.addEventListener('input', throttle(onFormInput, 500));
 const formData = localStorage.getItem(STORAGE_KEY)
   ? JSON.parse(localStorage.getItem(STORAGE_KEY))
   : {};
+
 function onFormInput(e) {
-  formData.email = e.currentTarget.email.value;
-  formData.message = e.currentTarget.message.value;
+  formData[e.target.name] = e.target.value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
